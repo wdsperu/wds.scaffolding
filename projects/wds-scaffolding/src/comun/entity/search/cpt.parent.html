@@ -1,0 +1,11 @@
+<wds-search [loadStatus$]="loadStatus$" >
+    <div *ngIf="result$|async as result" class="p-grid p-justify-center">
+        <div class="p-col-12">
+            <ng-container *ngTemplateOutlet="tableTemplate; context: {$implicit: result[searchConfig.resourceSearchConfig.paths.array],  columns: searchConfig.resourceSearchConfig.columns }; ">
+            </ng-container>
+            <p-paginator [rows]="limit" [first]="offset" [totalRecords]="result.total"
+                (onPageChange)="paginate($event)">
+            </p-paginator>
+        </div>
+    </div>
+</wds-search>

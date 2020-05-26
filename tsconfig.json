@@ -17,7 +17,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "wds-scaffolding": [
+        "dist/wds-scaffolding/wds-scaffolding",
+        "dist/wds-scaffolding"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

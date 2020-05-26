@@ -1,0 +1,21 @@
+<p-toast position="top-right"></p-toast>
+<wds-form [loadStatus$]="loadStatus$" [saveStatus$]="saveStatus$" pCol="p-col-12 p-md-6 p-lg-4 p-justify-center">
+    <form [formGroup]="resourceForm" novalidate (ngSubmit)="saveValid()">
+        <ng-container *ngTemplateOutlet="formTemplate; context: {$implicit: resourceForm, inputContainer:  inputContainer,schema: formConfig.resourceFormConfig.schema.children }">
+        </ng-container>
+        <ng-container *ngTemplateOutlet="buttonsTemplate?buttonsTemplate:defaultButtonsTemplate;">
+        </ng-container>
+    </form>
+</wds-form>
+
+<ng-template #defaultButtonsTemplate>
+    <div class="p-grid p-justify-center">
+        <div class="p-col">
+            <button pButton type="submit" label="Guardar" class="ui-button-success" style="width: 100%;"></button>
+        </div>
+        <div class="p-col">
+            <button pButton type="button" label="Cancelar" class="ui-button-warning" style="width: 100%;"
+                (click)="cancel()"></button>
+        </div>
+    </div>
+</ng-template>

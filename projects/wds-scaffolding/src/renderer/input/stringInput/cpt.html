@@ -1,0 +1,31 @@
+
+
+<input
+    [formControl]="this.inputConfig.formControl"
+    type="text" 
+    [placeholder]="inputConfig.config.placeholder"
+    pInputText 
+    *ngIf="inputConfig.config.type=='standar'" 
+    [style]="{'width':'100%', 'min-width':'100%', 'border':'1px solid'}"
+/>
+<input 
+    [formControl]="this.inputConfig.formControl"
+    type="text" 
+    pInputText
+    [pKeyFilter]="inputConfig.config.filter.type" 
+    *ngIf="inputConfig.config.type=='filter'"  
+    [style]="{'width':'100%', 'min-width':'100%'}"
+>
+<!-- , 'border':'1px solid' -->
+<p-inputMask 
+    [formControl]="this.inputConfig.formControl"
+    [mask]="inputConfig.config.mask.value" 
+    *ngIf="inputConfig.config.type=='mask'" 
+    [style]="{'width':'100%','min-width':'100%', 'border':'1px solid'}">
+</p-inputMask>
+
+
+<ng-container *ngIf="this.inputConfig.errors$|async as errors">
+    <p-message severity="error" *ngFor="let error of errors"  style="display: flex;"  [text]="error.error" ></p-message>
+</ng-container>
+

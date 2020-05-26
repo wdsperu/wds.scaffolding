@@ -1,0 +1,29 @@
+<ng-container *ngIf="saveStatus$|async as saveStatus ">
+    <p-blockUI [blocked]="saveStatus.saving"></p-blockUI>
+</ng-container>
+
+<p-dialog header="Title" [(visible)]="display" [style]="{width: '50vw'}">
+    Content
+</p-dialog>
+
+
+<p-panel [showHeader]="false">
+    <div *ngIf="loadStatus$ |async as loadStatus" class="p-grid p-justify-center">
+        <div *ngIf="loadStatus.loading">
+
+            <p-progressSpinner></p-progressSpinner>
+
+
+        </div>
+        <div *ngIf="!loadStatus.loading && loadStatus.loaded=='OK'" [ngClass]="pCol">
+            <p-panel [showHeader]="false">
+                <ng-content></ng-content>
+            </p-panel>
+
+        </div>
+        <div *ngIf="!loadStatus.loading && loadStatus.loaded=='ERROR'">
+            Cargado Error;
+            <pre>{{loadStatus.error|json}}</pre>
+        </div>
+    </div>
+</p-panel>

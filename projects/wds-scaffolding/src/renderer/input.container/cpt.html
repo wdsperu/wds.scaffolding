@@ -1,0 +1,50 @@
+<div *ngIf="inputContainer">
+    <label for="" *ngIf="inputContainer.label.has">{{inputContainer.label.text}}</label><br
+        *ngIf="inputContainer.label.has">
+    <div fxLayout="column" style="height: 45px;">
+        <div fxFlex fxLayout="row" >
+            <!-- Init Prefix -->
+            <div [fxFlex]="inputContainer.prefix.width" fxLayout="row" *ngIf="inputContainer.prefix&&inputContainer.prefix.has"
+                style="background-color: #eaeaea;">
+                <div [fxFlex]="element.width" *ngFor="let element of inputContainer.prefix.elements"
+                    style="text-align: center; border: 1px solid #848484;">
+                    <i *ngIf="element.type=='icon'" [ngClass]="element.icon"
+                        style="color: #848484; position: relative; top:calc(50% - 10px)"></i>
+                    <span *ngIf="element.type=='text'" style="color: #848484; position: relative; top:calc(50% - 10px)">
+                        {{element.text}}
+                    </span>
+
+                </div>
+            </div>
+            <!-- End Prefix -->
+            <!-- Init Input -->
+            <div [fxFlex]="inputContainer.input.width" fxLayout="row">
+                <!-- Init InputElement -->
+                <div [fxFlex]="element.width" *ngFor="let element of inputContainer.input.elements">
+                    <!-- <pre>{{element.inputConfig|json}}</pre> -->    
+                    <wds-renderer-input [formGroup]="formGroup" *ngIf="element.inputConfig" [inputConfig]="element.inputConfig"></wds-renderer-input>
+                    <!-- <input type="text" pInputText placeholder="Price" style="width: 100%; height: 100%"> -->
+                
+                
+                </div>
+                <!-- Init InputElement -->
+            </div>
+            <!-- End Input -->
+            <!-- Init Sufix -->
+            <div [fxFlex]="inputContainer.sufix.width" fxLayout="row" *ngIf="inputContainer.sufix&&inputContainer.sufix.has"
+                style="background-color: #eaeaea;">
+                <div [fxFlex]="element.width" *ngFor="let element of inputContainer.sufix.elements"
+                    style="text-align: center; border: 1px solid #848484;">
+                    <i *ngIf="element.type=='icon'" [ngClass]="element.icon"
+                        style="color: #848484; position: relative; top:calc(50% - 10px)"></i>
+                    <span *ngIf="element.type=='text'" style="color: #848484; position: relative; top:calc(50% - 10px)">
+                        {{element.text}}
+                    </span>
+                </div>
+            </div>
+            <!-- End Sufix -->
+        </div>
+        <!-- <div fxFlex="25%" style="background-color: white;"></div> -->
+    </div>
+
+</div>

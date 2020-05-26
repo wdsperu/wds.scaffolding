@@ -1,0 +1,10 @@
+<p-dropdown 
+    [options]="items$|async" 
+    [formControl]="this.inputConfig.formControl" 
+    [style]="{'width':'100%','min-width':'100%'}"
+    [filter]="true"
+    >
+</p-dropdown>
+<ng-container *ngIf="this.inputConfig.errors$|async as errors">
+    <p-message severity="error" *ngFor="let error of errors"  style="display: flex;"  [text]="error.error" ></p-message>
+</ng-container>

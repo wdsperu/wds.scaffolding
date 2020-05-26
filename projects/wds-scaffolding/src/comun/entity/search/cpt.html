@@ -1,0 +1,15 @@
+<div *ngIf="loadStatus$ |async as loadStatus">
+    <div *ngIf="loadStatus.loading"
+        style="  display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;align-items: center;">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+    <div *ngIf="!loadStatus.loading && loadStatus.loaded=='OK'">
+        <ng-content></ng-content>
+    </div>
+    <div *ngIf="!loadStatus.loading && loadStatus.loaded=='ERROR'" class="text-error">
+        <div> Cargado Error</div>
+        <div>
+            <pre>{{loadStatus.error|json}}</pre>
+        </div>
+    </div>
+</div>

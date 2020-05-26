@@ -1,0 +1,19 @@
+<input 
+    type="password" 
+    pInputText 
+    [formControl]="this.inputConfig.formControl"
+    *ngIf="inputConfig.config.type=='standar'" 
+    [style]="{'width':'100%', 'min-width':'100%'}" 
+/>
+<input 
+    type="password" 
+    pPassword 
+    [formControl]="this.inputConfig.formControl"
+    *ngIf="inputConfig.config.type=='advanced'" 
+    [style]="{'width':'100%', 'min-width':'100%'}"
+/>
+
+<ng-container *ngIf="this.inputConfig.errors$|async as errors">
+    <p-message severity="error" *ngFor="let error of errors"  style="display: flex;"  [text]="error.error" ></p-message>
+</ng-container>
+

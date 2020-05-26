@@ -1,0 +1,81 @@
+<!-- <pre>selectedItems:{{selectedItems|json}}</pre> -->
+<div class="p-grid">
+    <div class="p-col-12" *ngIf="items">
+        <label for="">{{config.label}}</label>
+        <div class="ui-inputgroup">
+            <p-multiSelect [options]="items" (onChange)="onChange($event)" [(ngModel)]="selectedItems"
+                [defaultLabel]="config.placeholder" [filterPlaceHolder]="'Buscar'" [ngModelOptions]="{standalone:true}"
+                style="width: 100%;" [style]="{'width':'100%', 'min-width':'100%'}"></p-multiSelect>
+            <button pButton type="button" icon="pi pi-search" class="ui-button-info"
+                (click)="clickSufixBtnx()"></button>
+        </div>
+    </div>
+</div>
+<div class="p-grid" cdkDropList [cdkDropListData]="formArray" (cdkDropListDropped)="onTaskDrop($event)">
+    <div class="p-col-12">
+        <p-table #dt [columns]="config.columns" [value]="formArray['controls']">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <ng-container *ngFor="let col of columns">
+                        <th *ngIf="col" [style.width]="col.width||1">
+                            {{col.header}}
+                        </th>
+                    </ng-container>
+                    <th [style.width]="'50px'"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-formGroupRow let-columns="columns" let-rowIndex="rowIndex">
+                <tr cdkDrag>
+                    <ng-container *ngFor="let col of columns">
+                        <!-- {{rowData[col.field]}} -->
+                        <!-- <pre>{{col|json}}</pre> -->
+                        <ng-container *ngIf="col.type=='index'">
+                            <td>
+                                {{ rowIndex+1  }}
+                            </td>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="col.type=='searchable'">
+                            <td>
+                                {{formGroupRow.value[col.searchable.path].label }}
+                            </td>
+                        </ng-container>
+                        <ng-container *ngIf="col.type=='button'">
+                            <td style="text-align: center;">
+                                <button (click)="clickOnRow(formGroupRow,col)" pButton type="button"
+                                    [icon]="col.button.icon" iconPos="left"></button>
+                            </td>
+                        </ng-container>
+                        <w-input *ngIf="col.type=='inputContainer'" [formGroup]="formGroupRow" [schema]="schema"
+                            [inputContainer]="col.inputContainer">
+                        </w-input>
+                    </ng-container>
+
+                    <td>
+                        <button (click)="remove(rowIndex)" pButton type="button" icon="pi pi-trash" iconPos="left"
+                            style="background-color: transparent; color: red; border: 1px solid red;">
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+            <!-- <ng-template pTemplate="body" let-formGroupRow let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{rowIndex+1}}</td>
+                    <td>
+                        {{ formGroupRow.value.id.label }}
+                    </td>
+                    <td>
+                         <w-input [formGroup]="formGroupRow"
+                            [schema]="schema"
+                            [inputContainer]="inputContainer['CAMPOS_OBLIGATORIO']">
+                        </w-input> 
+                    </td>
+                    <td>
+                        Trash
+                    </td>
+                </tr>
+            </ng-template> -->
+        </p-table>
+    </div>
+</div>
